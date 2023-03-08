@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class WeatherController {
-    private  final WeatherService forecastService;
+    private final WeatherService forecastService;
 
     @GetMapping("/")
     public Location getWeatherData() {
