@@ -6,7 +6,6 @@ import com.project.weather.model.Weather;
 import com.project.weather.repository.LocationRepository;
 import com.project.weather.repository.WeatherRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,13 +19,14 @@ public class WeatherService {
     private final LocationRepository locationRepository;
     private final WeatherRepository weatherRepository;
     private final RestTemplate restTemplate;
+    private final String apiKey = System.getenv("API_KEY");
 
-    @SneakyThrows
+
     public Location download() {
         Location location = new Location();
         List<Weather> weathers = new ArrayList<>();
-        Integer dateCount = 0;
-        String apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=London&appid=8abf0e95a75a66c522a7f0f364de6f27";
+        int dateCount = 0;
+        String apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=London&appid=" + apiKey;
 
         JsonNode response = restTemplate.getForObject(apiUrl, JsonNode.class);
 
